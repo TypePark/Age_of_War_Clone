@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://uajmkrch4b02"]
+
+[ext_resource type="Texture2D" uid="uid://46mlxx7a87n2" path="res://Textures/arrow.jpeg" id="1_cweqp"]
+
+[sub_resource type="GDScript" id="GDScript_yjm8s"]
+resource_name = "Character"
+script/source = "extends Node2D
+
+@export var arrow:Node2D
+@export var rotationSpeed:float=3
+var minRot=20;
+var maxRot=-100;
+enum States{
+	SELECTDIR,
+	STRETCH,
+	WAIT
+}
+@export var State:States=States.WAIT;
+var direction:float=-1.0;
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if(arrow.global_rotation_degrees<-100.0):
+		direction=1;
+		arrow.global_rotation_degrees=-100.0;
+	elif(arrow.global_rotation_degrees>20):
+		direction=-1;
+		arrow.global_rotation_degrees=20.0;
+	arrow.rotate(delta*rotationSpeed*direction);
+"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_yjm8s"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_crnd2"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_s35tl"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_m0xn7"]
+diffuse_texture = ExtResource("1_cweqp")
+
+[node name="Character" type="Node2D" unique_id=166600950 node_paths=PackedStringArray("arrow")]
+script = SubResource("GDScript_yjm8s")
+arrow = NodePath("arrow")
+
+[node name="body" type="Sprite2D" parent="." unique_id=972383050]
+position = Vector2(0, -4.5)
+scale = Vector2(20, 27)
+texture = SubResource("CanvasTexture_yjm8s")
+
+[node name="Sprite2D" type="Sprite2D" parent="body" unique_id=1891772932]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_crnd2")
+position = Vector2(-0.275, -0.3148148)
+scale = Vector2(0.24999999, 0.07407409)
+texture = SubResource("CanvasTexture_s35tl")
+
+[node name="Sprite2D2" type="Sprite2D" parent="body" unique_id=223152090]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_crnd2")
+position = Vector2(0.25, -0.3148148)
+scale = Vector2(0.24999999, 0.07407409)
+texture = SubResource("CanvasTexture_s35tl")
+
+[node name="arrow" type="Sprite2D" parent="." unique_id=884457124]
+position = Vector2(1.1920929e-07, -26.5)
+scale = Vector2(0.114583336, 0.054263562)
+texture = SubResource("CanvasTexture_m0xn7")
