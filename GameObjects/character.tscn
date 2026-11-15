@@ -13,10 +13,12 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_m0xn7"]
 diffuse_texture = ExtResource("1_cweqp")
 
-[node name="Character" type="Node2D" unique_id=166600950 node_paths=PackedStringArray("arrow")]
+[node name="Character" type="Node2D" unique_id=166600950 node_paths=PackedStringArray("arrow", "targetPos")]
 script = ExtResource("1_6cir5")
 arrow = NodePath("arrow")
+throwForce = 1500.0
 Obstacle = ExtResource("2_20moc")
+targetPos = NodePath("arrow/ObjectSpawnPoint")
 
 [node name="body" type="Sprite2D" parent="." unique_id=972383050]
 position = Vector2(0, -4.5)

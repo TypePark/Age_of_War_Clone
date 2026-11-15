@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://46mlxx7a87n2" path="res://Textures/arrow.jpeg" id="1_djh2d"]
 [ext_resource type="Script" uid="uid://egqugyoawox3" path="res://Scripts/character2.gd" id="2_iv6wk"]
+[ext_resource type="PackedScene" uid="uid://dckp3eafth455" path="res://GameObjects/ball.tscn" id="3_hic7y"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yjm8s"]
 
@@ -12,9 +13,12 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_m0xn7"]
 diffuse_texture = ExtResource("1_djh2d")
 
-[node name="Character" type="Node2D" unique_id=166600950 node_paths=PackedStringArray("arrow")]
+[node name="Character" type="Node2D" unique_id=166600950 node_paths=PackedStringArray("arrow", "targetPos")]
 script = ExtResource("2_iv6wk")
 arrow = NodePath("arrow")
+throwForce = 1500.0
+Obstacle = ExtResource("3_hic7y")
+targetPos = NodePath("arrow/ObjectSpawnPoint")
 
 [node name="body" type="Sprite2D" parent="." unique_id=972383050]
 position = Vector2(0, -4.5)
