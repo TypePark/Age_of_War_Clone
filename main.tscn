@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckbqg3ejij26m"]
+[gd_scene load_steps=5 format=3 uid="uid://ckbqg3ejij26m"]
 
 [ext_resource type="Texture2D" uid="uid://bqjunqm0ack3f" path="res://Textures/background.png" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://6ia1son0v4rq" path="res://GameObjects/Net.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://c0iras841rq7s" path="res://GameObjects/ground.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://8bygtutwg4kr" path="res://ball_physics.gd" id="4_1bvp3"]
 
 [node name="Main" type="Node2D"]
 
@@ -19,3 +20,6 @@ position = Vector2(581, 583)
 
 [node name="Ground" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(-3, 711)
+
+[node name="ball_physics" type="Node2D" parent="."]
+script = ExtResource("4_1bvp3")
