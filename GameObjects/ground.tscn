@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0iras841rq7s"]
+[gd_scene format=3 uid="uid://c0iras841rq7s"]
 
 [ext_resource type="Texture2D" uid="uid://b0st1ocgwod84" path="res://Textures/icon.svg" id="1_ep1oq"]
 

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b7jpaq61kx6hw"]
+
+[ext_resource type="Texture2D" uid="uid://46mlxx7a87n2" path="res://Textures/arrow.jpeg" id="1_djh2d"]
+[ext_resource type="Script" uid="uid://egqugyoawox3" path="res://Scripts/character2.gd" id="2_iv6wk"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_yjm8s"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_crnd2"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_s35tl"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_m0xn7"]
+diffuse_texture = ExtResource("1_djh2d")
+
+[node name="Character" type="Node2D" unique_id=166600950 node_paths=PackedStringArray("arrow")]
+script = ExtResource("2_iv6wk")
+arrow = NodePath("arrow")
+
+[node name="body" type="Sprite2D" parent="." unique_id=972383050]
+position = Vector2(0, -4.5)
+scale = Vector2(20, 27)
+texture = SubResource("CanvasTexture_yjm8s")
+
+[node name="Sprite2D" type="Sprite2D" parent="body" unique_id=1891772932]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_crnd2")
+position = Vector2(-0.275, -0.3148148)
+scale = Vector2(0.24999999, 0.07407409)
+texture = SubResource("CanvasTexture_s35tl")
+
+[node name="Sprite2D2" type="Sprite2D" parent="body" unique_id=223152090]
+modulate = Color(0, 0, 0, 1)
+material = SubResource("CanvasItemMaterial_crnd2")
+position = Vector2(0.25, -0.3148148)
+scale = Vector2(0.24999999, 0.07407409)
+texture = SubResource("CanvasTexture_s35tl")
+
+[node name="arrow" type="Sprite2D" parent="." unique_id=884457124]
+position = Vector2(1.1920929e-07, -26.5)
+rotation = -3.1415927
+scale = Vector2(0.114583336, 0.054263562)
+texture = SubResource("CanvasTexture_m0xn7")
+
+[node name="ObjectSpawnPoint" type="Node2D" parent="arrow" unique_id=1739264795]
+position = Vector2(130.90909, 9.214287)

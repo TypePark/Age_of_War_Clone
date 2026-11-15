@@ -1,66 +1,8 @@
-[gd_scene load_steps=0 format=3 uid="uid://uajmkrch4b02"]
+[gd_scene format=3 uid="uid://uajmkrch4b02"]
 
+[ext_resource type="Script" uid="uid://2ibuhwqng3t1" path="res://Scripts/character1.gd" id="1_6cir5"]
 [ext_resource type="Texture2D" uid="uid://46mlxx7a87n2" path="res://Textures/arrow.jpeg" id="1_cweqp"]
-
-[sub_resource type="GDScript" id="GDScript_yjm8s"]
-resource_name = "Character"
-script/source = "extends Node2D
-
-@export var arrow:Node2D
-@export var rotationSpeed:float=3
-@export var throwForce:float=100.0;
-enum Directions{
-	RIGHT,
-	LEFT
-}
-@export var CharacterFacingDirection:Directions= Directions.RIGHT;
-var minRot=20;
-var maxRot=-100;
-enum States{
-	SELECTDIR,
-	STRETCH,
-	WAIT
-}
-var throwScale:float=0.0;
-@export var State:States=States.SELECTDIR;
-@export var Obstacle:PackedScene
-var direction:float=-1.0;
-var direction1:float=-1.0;
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	match CharacterFacingDirection:
-		Directions.RIGHT:
-			scale.x*=1;
-		Directions.LEFT:
-			scale.x*=-1;
-
-
-func _process(delta: float) -> void:
-	match State:
-		States.SELECTDIR:
-			if(arrow.global_rotation_degrees<-100.0):
-				direction=1;
-				arrow.global_rotation_degrees=-100.0;
-			elif(arrow.global_rotation_degrees>20):
-				direction=-1;
-				arrow.global_rotation_degrees=20.0;
-			arrow.rotate(delta*rotationSpeed*direction);
-			if(Input.is_action_just_pressed(\"ui_accept\")):
-				State=States.STRETCH;
-		States.STRETCH:
-			if(throwScale>1.0):
-				throwScale=1.0;
-				direction1*=-1;
-			elif(throwScale<0.0):
-				throwScale=0.0;
-				direction1*=-1;
-			throwScale+=direction1*delta*rotationSpeed;
-			arrow.scale.x=0.01+0.2*throwScale;
-			var forward = global_transform.x.normalized()
-			
-		States.WAIT:
-			pass
-"
+[ext_resource type="PackedScene" uid="uid://dckp3eafth455" path="res://GameObjects/ball.tscn" id="2_20moc"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yjm8s"]
 
@@ -72,8 +14,9 @@ func _process(delta: float) -> void:
 diffuse_texture = ExtResource("1_cweqp")
 
 [node name="Character" type="Node2D" unique_id=166600950 node_paths=PackedStringArray("arrow")]
-script = SubResource("GDScript_yjm8s")
+script = ExtResource("1_6cir5")
 arrow = NodePath("arrow")
+Obstacle = ExtResource("2_20moc")
 
 [node name="body" type="Sprite2D" parent="." unique_id=972383050]
 position = Vector2(0, -4.5)
