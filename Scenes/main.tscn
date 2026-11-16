@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ckbqg3ejij26m"]
+[gd_scene load_steps=6 format=3 uid="uid://ckbqg3ejij26m"]
 
 [ext_resource type="Texture2D" uid="uid://bqjunqm0ack3f" path="res://Textures/background.png" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://6ia1son0v4rq" path="res://GameObjects/Net.tscn" id="2_h2yge"]
@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://uajmkrch4b02" path="res://GameObjects/character.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://b7jpaq61kx6hw" path="res://GameObjects/character2.tscn" id="6_21xkr"]
 
-[node name="Main" type="Node2D" unique_id=1475028971]
+[node name="Main" type="Node2D"]
 
-[node name="Background" type="TextureRect" parent="." unique_id=181831084]
+[node name="Background" type="TextureRect" parent="."]
 offset_left = -6.0
 offset_top = -1.0
 offset_right = 1160.0
@@ -16,19 +16,45 @@ offset_bottom = 647.0
 texture = ExtResource("1_0xm2m")
 expand_mode = 3
 
-[node name="Net" parent="." unique_id=858996439 instance=ExtResource("2_h2yge")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="player1" type="Label" parent="CanvasLayer"]
+offset_left = 494.0
+offset_top = 457.0
+offset_right = 534.0
+offset_bottom = 480.0
+
+[node name="player2" type="Label" parent="CanvasLayer"]
+offset_left = 618.0
+offset_top = 457.0
+offset_right = 658.0
+offset_bottom = 480.0
+
+[node name="Net" parent="." instance=ExtResource("2_h2yge")]
 position = Vector2(600, 703)
 
-[node name="Ground" parent="." unique_id=497308466 instance=ExtResource("3_h2yge")]
+[node name="Ground" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(-3, 711)
 
-[node name="Ground2" parent="." unique_id=749625952 instance=ExtResource("3_h2yge")]
-position = Vector2(-9, -84)
+[node name="wall2" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(-148, 771)
+rotation = -1.56783
 
-[node name="Character" parent="." unique_id=166600950 instance=ExtResource("5_kry3j")]
+[node name="wall1" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(1276, -363)
+rotation = 1.5712
+
+[node name="Ceilingh" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(5, -93)
+
+[node name="Character" parent="." node_paths=PackedStringArray("otherPlayer", "scoreLabel") instance=ExtResource("5_kry3j")]
 position = Vector2(63, 628)
 scale = Vector2(2, 2)
+otherPlayer = NodePath("../Character2")
+scoreLabel = NodePath("../CanvasLayer/player1")
 
-[node name="Character2" parent="." unique_id=914940598 instance=ExtResource("6_21xkr")]
+[node name="Character2" parent="." node_paths=PackedStringArray("otherPlayer", "scoreLabel") instance=ExtResource("6_21xkr")]
 position = Vector2(1074, 629)
 scale = Vector2(2, 2)
+otherPlayer = NodePath("../Character")
+scoreLabel = NodePath("../CanvasLayer/player2")

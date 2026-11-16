@@ -3,6 +3,10 @@ extends Node2D
 @export var arrow:Node2D
 @export var rotationSpeed:float=3
 @export var throwForce:float=100.0;
+@export var otherPlayer: Node2D
+@export var winScore: int = 3
+var score: int = 0
+@export var scoreLabel: Label
 enum Directions{
 	RIGHT,
 	LEFT
@@ -28,6 +32,10 @@ func _ready() -> void:
 			scale.x*=1;
 		Directions.LEFT:
 			scale.x*=-1;
+	if State == States.WAIT:
+		arrow.hide()
+	if scoreLabel:
+		scoreLabel.text = "0"
 
 
 func _process(delta: float) -> void:
@@ -57,6 +65,35 @@ func _process(delta: float) -> void:
 				obj.global_position = targetPos.global_position
 				var dir = Vector2.RIGHT.rotated(arrow.global_rotation)
 				obj.linear_velocity = dir * throwScale * throwForce
-				State=States.SELECTDIR;
+				obj.contact_monitor = true
+				obj.max_contacts_reported = 1
+				obj.body_entered.connect(func(body):
+					if body == otherPlayer or otherPlayer.is_ancestor_of(body):
+						score += 1
+						if scoreLabel:
+							scoreLabel.text = str(score)
+						if score >= winScore:
+							OS.crash("Game Over")
+						print("Score: ", score)
+						obj.queue_free()
+				)
+				throwScale = 0.0
+				arrow.scale.x = 0.1
+				get_tree().create_timer(4.0).timeout.connect(obj.queue_free)
+				State = States.WAIT
+				arrow.hide()
+				get_tree().create_timer(4.0).timeout.connect(func():
+					if otherPlayer:
+						otherPlayer.arrow.show()
+						otherPlayer.State = States.SELECTDIR
+				)
 		States.WAIT:
 			pass
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_KP_8 and Input.is_key_pressed(KEY_KP_ADD):
+			score += 1
+			if scoreLabel:
+				scoreLabel.text = str(score)
+			if score >= winScore:
+				OS.crash("Game Over")
