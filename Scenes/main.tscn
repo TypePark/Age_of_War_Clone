@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://ckbqg3ejij26m"]
+
+[ext_resource type="Texture2D" uid="uid://bqjunqm0ack3f" path="res://Textures/background.png" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://6ia1son0v4rq" path="res://GameObjects/Net.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://c0iras841rq7s" path="res://GameObjects/ground.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://uajmkrch4b02" path="res://GameObjects/character.tscn" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://b7jpaq61kx6hw" path="res://GameObjects/character2.tscn" id="6_21xkr"]
+
+[node name="Main" type="Node2D" unique_id=1475028971]
+
+[node name="Background" type="TextureRect" parent="." unique_id=181831084]
+offset_left = -6.0
+offset_top = -1.0
+offset_right = 1160.0
+offset_bottom = 647.0
+texture = ExtResource("1_0xm2m")
+expand_mode = 3
+
+[node name="Net" parent="." unique_id=858996439 instance=ExtResource("2_h2yge")]
+position = Vector2(600, 703)
+
+[node name="Ground" parent="." unique_id=497308466 instance=ExtResource("3_h2yge")]
+position = Vector2(-3, 711)
+
+[node name="Ground2" parent="." unique_id=749625952 instance=ExtResource("3_h2yge")]
+position = Vector2(-9, -84)
+
+[node name="Character" parent="." unique_id=166600950 instance=ExtResource("5_kry3j")]
+position = Vector2(63, 628)
+scale = Vector2(2, 2)
+
+[node name="Character2" parent="." unique_id=914940598 instance=ExtResource("6_21xkr")]
+position = Vector2(1074, 629)
+scale = Vector2(2, 2)
